@@ -44,7 +44,7 @@ final class ProgrammePickerField extends DropdownField
     public function getSource(): array
     {
         $src = parent::getSource() ?: [];
-        $val = (string) $this->getValue();
+        $val = (string) ($this->getValue() ?? '');
         if ($val !== '' && $val !== '0' && !array_key_exists($val, $src)) {
             $src = ['' => $this->getEmptyString(), $val => "Selected ID {$val}"] + $src;
         }
@@ -62,7 +62,7 @@ final class ProgrammePickerField extends DropdownField
         $realName = $this->name;
         $realId   = $this->ID();
 
-        $val          = htmlspecialchars((string) ($this->Value() ?: ''), ENT_QUOTES, 'UTF-8');
+        $val          = htmlspecialchars((string) ($this->getValue() ?: ''), ENT_QUOTES, 'UTF-8');
         $escapedName  = htmlspecialchars($realName, ENT_QUOTES, 'UTF-8');
         $escapedId    = htmlspecialchars($realId, ENT_QUOTES, 'UTF-8');
         $hiddenHTML   = "<input type=\"hidden\" id=\"{$escapedId}\" name=\"{$escapedName}\" value=\"{$val}\" />";
