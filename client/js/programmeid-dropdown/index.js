@@ -53,9 +53,9 @@
         const hiddenName = String($select.data('hidden-field') || 'ProgrammeID');
         const $hidden = $select.closest('form').find(`[name="${hiddenName}"]`);
 
-        // Load existing value
+        // Load existing value — treat "0" as empty (SilverStripe Int columns default to 0)
         const existingId = String($hidden.val() || $select.val() || '').trim();
-        if (existingId) {
+        if (existingId && existingId !== '0') {
           setLoading(ui, true);
           fetchJSON(get($holder, 'endpoint'), { id: existingId })
             .done((resp) => {
