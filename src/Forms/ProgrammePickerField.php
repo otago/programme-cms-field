@@ -3,22 +3,19 @@
 namespace Otago\ProgrammeCmsField\Forms;
 
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\View\Requirements;
 
 /**
  * CMS form field for picking a programme from the online.op.ac.nz GraphQL API.
  *
  * Renders an accessible search-as-you-type combobox that proxies results through
- * the SilverStripe admin (/admin/programme-options/list). The selected integer
- * Programme ID is stored via a hidden field whose name is configured via the
- * data-hidden-field attribute (default: "ProgrammeID").
+ * the SilverStripe admin (/admin/programme-options/list). Pass the DB field name
+ * directly — the hidden input is managed internally.
  *
  * Usage in getCMSFields():
  *
- *   $fields->addFieldToTab('Root.Main', ProgrammePickerField::create('ProgrammeIDPicker')
- *       ->setAttribute('data-hidden-field', 'ProgrammeID')
- *   );
- *   $fields->addFieldToTab('Root.Main', HiddenField::create('ProgrammeID', 'Programme ID'));
+ *   $fields->addFieldToTab('Root.Main', ProgrammePickerField::create('ProgrammeID'));
  *
  * The JS/CSS requirements are loaded automatically when the field is rendered.
  */
@@ -26,20 +23,16 @@ final class ProgrammePickerField extends DropdownField
 {
     private static string $module_path = 'otago/programme-cms-field:';
 
-    /**
-     * @param string|null $name
-     * @param string|null $title
-     * @param mixed|null  $value
-     */
-    public function __construct($name = 'ProgrammeIDPicker', $title = 'Programme', $value = null)
+    public function __construct(string $name, ?string $title = null)
     {
-        parent::__construct($name, $title, []);
+        parent::__construct($name, $title ?? 'Programme', []);
         $this->setHasEmptyDefault(true);
         $this->setEmptyString('- Select a programme -');
         $this->addExtraClass('js-programmeid-dropdown');
         $this->setAttribute('data-remote-endpoint', '/admin/programme-options/list');
         $this->setAttribute('data-page-size', '25');
         $this->setAttribute('data-placeholder', 'Search programmes…');
+        $this->setAttribute('data-hidden-field', $name);
     }
 
     /**
@@ -48,34 +41,42 @@ final class ProgrammePickerField extends DropdownField
      *
      * @return array<string,string>
      */
-    public function getSource()
+    public function getSource(): array
     {
         $src = parent::getSource() ?: [];
         $val = (string) $this->getValue();
-        if ($val === '' && isset($_POST)) {
-            $name = $this->getName();
-            if ($name && array_key_exists($name, $_POST)) {
-                $raw = $_POST[$name];
-                $val = is_array($raw) ? (string) reset($raw) : (string) $raw;
-            }
-        }
-        if ($val !== '' && !array_key_exists($val, $src)) {
+        if ($val !== '' && $val !== '0' && !array_key_exists($val, $src)) {
             $src = ['' => $this->getEmptyString(), $val => "Selected ID {$val}"] + $src;
         }
         return $src;
     }
 
     /**
-     * Load all JS and CSS requirements when the field renders.
+     * Render a hidden input (carries the real DB value) followed by the picker
+     * select (which uses a __picker name suffix so SilverStripe ignores it on save).
      */
     public function Field($properties = [])
     {
         self::loadRequirements();
-        return parent::Field($properties);
+
+        $realName = $this->name;
+        $realId   = $this->ID();
+
+        $val          = htmlspecialchars((string) ($this->Value() ?: ''), ENT_QUOTES, 'UTF-8');
+        $escapedName  = htmlspecialchars($realName, ENT_QUOTES, 'UTF-8');
+        $escapedId    = htmlspecialchars($realId, ENT_QUOTES, 'UTF-8');
+        $hiddenHTML   = "<input type=\"hidden\" id=\"{$escapedId}\" name=\"{$escapedName}\" value=\"{$val}\" />";
+
+        // Swap name so <select> doesn't shadow the hidden field in the POST.
+        $this->name = $realName . '__picker';
+        $selectHTML = (string) parent::Field($properties);
+        $this->name = $realName;
+
+        return DBHTMLText::create()->setValue($hiddenHTML . $selectHTML);
     }
 
     /**
-     * Manually load all JS/CSS requirements for this field.
+     * Load all JS/CSS requirements for this field.
      * Called automatically by Field() — only needed if you are rendering
      * the field outside the normal form context.
      */
