@@ -1,0 +1,30 @@
+/* app/programmes/client/css/programmeid-dropdown/variables.css */
+
+:root {
+    --pid-bg: #ffffff;
+    --pid-panel: #f8fafc;
+    --pid-border: #e5e7eb;
+    --pid-text: #1f2937;
+    --pid-muted: #667085;
+    --pid-blue: #01509f;
+    --pid-blue-600: #0a478a;
+    --pid-green: #1b5e20;
+    --pid-amber: #8a6d3b;
+    --pid-red: #c62828;
+
+    --pid-s-1: 4px;
+    --pid-s-2: 8px;
+    --pid-s-3: 12px;
+    --pid-s-4: 16px;
+
+    --pid-r-1: 6px;
+    --pid-r-2: 10px;
+    --pid-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+    --pid-font-sans:
+        system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji',
+        'Segoe UI Emoji';
+    --pid-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+    --pid-transition: 140ms ease-in-out;
+}

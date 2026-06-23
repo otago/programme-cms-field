@@ -1,0 +1,17 @@
+/* programmeid-dropdown/base.css */
+
+.programmeid-dd-wrap {
+    font-family: var(--pid-font-sans);
+    color: var(--pid-text);
+    margin-bottom: var(--pid-s-1);
+}
+
+.programmeid-dd-wrap + select {
+    /* Native select is visually hidden but must stay in DOM for SS validation */
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    overflow: hidden;
+}

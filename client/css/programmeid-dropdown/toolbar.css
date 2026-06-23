@@ -1,0 +1,118 @@
+/* programmeid-dropdown/toolbar.css — selected state card + input row */
+
+.programmeid-dd-box {
+    position: relative;
+    font-family: var(--pid-font-sans);
+    font-size: 14px;
+    color: var(--pid-text);
+}
+
+/* ── Selected card ──────────────────────────────────────────────── */
+
+.programmeid-dd-selected {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--pid-s-3);
+    padding: var(--pid-s-2) var(--pid-s-3);
+    background: var(--pid-panel);
+    border: 1px solid var(--pid-border);
+    border-radius: var(--pid-r-1);
+}
+
+.programmeid-dd-selected-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pid-s-1);
+    min-width: 0;
+    flex: 1;
+}
+
+.programmeid-dd-selected-name {
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--pid-text);
+}
+
+.programmeid-dd-selected-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--pid-s-2);
+    font-size: 12px;
+    color: var(--pid-muted);
+}
+
+.programmeid-dd-id-value {
+    font-family: var(--pid-font-mono);
+    font-size: 12px;
+    background: #fff;
+    border: 1px solid var(--pid-border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: var(--pid-text);
+}
+
+.programmeid-dd-selected-actions {
+    display: flex;
+    gap: var(--pid-s-1);
+    flex-shrink: 0;
+}
+
+/* Shared button base */
+.programmeid-dd-copy,
+.programmeid-dd-change,
+.programmeid-dd-clear {
+    padding: 3px 10px;
+    border-radius: var(--pid-r-1);
+    border: 1px solid var(--pid-border);
+    background: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: var(--pid-font-sans);
+    transition:
+        border-color var(--pid-transition),
+        color var(--pid-transition),
+        background var(--pid-transition);
+    white-space: nowrap;
+}
+
+.programmeid-dd-copy {
+    color: var(--pid-muted);
+}
+
+.programmeid-dd-copy:hover {
+    border-color: var(--pid-blue);
+    color: var(--pid-blue);
+}
+
+.programmeid-dd-change {
+    color: var(--pid-blue);
+    border-color: var(--pid-blue);
+}
+
+.programmeid-dd-change:hover {
+    background: var(--pid-blue);
+    color: #fff;
+}
+
+.programmeid-dd-clear {
+    color: var(--pid-red);
+    border-color: currentColor;
+}
+
+.programmeid-dd-clear:hover {
+    background: var(--pid-red);
+    color: #fff;
+    border-color: var(--pid-red);
+}
+
+/* ── Search input row ───────────────────────────────────────────── */
+
+.programmeid-dd-input-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+}

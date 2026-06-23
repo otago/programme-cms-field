@@ -1,0 +1,24 @@
+/* programmeid-dropdown/spinner.css */
+
+.programmeid-dd-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #e5e7eb;
+    border-top-color: var(--pid-blue);
+    border-radius: 50%;
+    animation: pid-spin 0.7s linear infinite;
+    flex-shrink: 0;
+}
+
+@keyframes pid-spin {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .programmeid-dd-spinner {
+        animation: none;
+        border-top-color: var(--pid-blue-600);
+    }
+}

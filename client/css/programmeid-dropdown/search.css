@@ -1,0 +1,40 @@
+/* programmeid-dropdown/search.css */
+
+.programmeid-dd-search {
+    width: 100%;
+    padding: 8px 36px 8px 12px; /* right pad for spinner */
+    border: 1px solid var(--pid-border);
+    border-radius: var(--pid-r-1);
+    font-family: var(--pid-font-sans);
+    font-size: 14px;
+    color: var(--pid-text);
+    background: #fff;
+    transition:
+        border-color var(--pid-transition),
+        box-shadow var(--pid-transition);
+    /* Remove the default browser search cancel button */
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.programmeid-dd-search::-webkit-search-cancel-button {
+    display: none;
+}
+
+.programmeid-dd-search:focus {
+    border-color: var(--pid-blue);
+    box-shadow: 0 0 0 3px rgba(1, 80, 159, 0.12);
+    outline: none;
+}
+
+.programmeid-dd-search::placeholder {
+    color: #9ca3af;
+}
+
+.programmeid-dd-spinner {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}

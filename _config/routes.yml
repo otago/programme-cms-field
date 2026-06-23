@@ -1,0 +1,6 @@
+---
+Name: programme-cms-field-routes
+---
+SilverStripe\Control\Director:
+  rules:
+    'admin/programme-options': 'Otago\ProgrammeCmsField\Controllers\ProgrammeOptionsController'

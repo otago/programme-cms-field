@@ -1,0 +1,26 @@
+/* programmeid-dropdown/accessibility.css */
+
+.programmeid-dd-search:focus,
+.programmeid-dd-copy:focus,
+.programmeid-dd-change:focus,
+.programmeid-dd-clear:focus,
+.programmeid-dd-loadmore:focus {
+    outline: 2px solid rgba(1, 80, 159, 0.5);
+    outline-offset: 2px;
+}
+
+.programmeid-dd-option:focus {
+    outline: none;
+}
+
+.op-sr-only {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

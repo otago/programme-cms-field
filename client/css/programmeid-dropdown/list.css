@@ -1,0 +1,89 @@
+/* programmeid-dropdown/list.css */
+
+.programmeid-dd-listbox {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 2px);
+    z-index: 9999;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+    border: 1px solid var(--pid-border);
+    border-radius: var(--pid-r-1);
+    background: #fff;
+    box-shadow: var(--pid-shadow);
+    max-height: 280px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.programmeid-dd-option {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--pid-s-2);
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background var(--pid-transition);
+    line-height: 1.35;
+}
+
+.programmeid-dd-option:hover,
+.programmeid-dd-option.is-active {
+    background: #eff6ff;
+}
+
+.programmeid-dd-option.is-active {
+    outline: none;
+}
+
+.programmeid-dd-option-label {
+    font-size: 14px;
+    color: var(--pid-text);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.programmeid-dd-option-id {
+    font-family: var(--pid-font-mono);
+    font-size: 11px;
+    color: var(--pid-muted);
+    flex-shrink: 0;
+}
+
+.programmeid-dd-loadmore-item,
+.programmeid-dd-loadmore {
+    display: block;
+    width: 100%;
+    margin-top: var(--pid-s-1);
+    padding: 7px 12px;
+    background: transparent;
+    border: 1px dashed var(--pid-border);
+    border-radius: var(--pid-r-1);
+    font-size: 13px;
+    color: var(--pid-blue);
+    cursor: pointer;
+    text-align: center;
+    transition:
+        border-color var(--pid-transition),
+        background var(--pid-transition);
+    font-family: var(--pid-font-sans);
+}
+
+.programmeid-dd-loadmore-item:hover,
+.programmeid-dd-loadmore:hover {
+    background: #eff6ff;
+    border-color: var(--pid-blue);
+}
+
+.programmeid-dd-loadmore-item {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    margin-top: 0;
+}

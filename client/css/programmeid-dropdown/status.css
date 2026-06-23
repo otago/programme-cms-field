@@ -1,0 +1,27 @@
+/* programmeid-dropdown/status.css */
+
+.programmeid-dd-status {
+    font-size: 12px;
+    color: var(--pid-muted);
+    min-height: 16px;
+    margin-top: var(--pid-s-1);
+    padding: 0 2px;
+    transition: color var(--pid-transition);
+}
+
+.programmeid-dd-status:empty {
+    min-height: 0;
+}
+
+.programmeid-dd-status.is-ok {
+    color: var(--pid-green);
+}
+
+.programmeid-dd-status.is-warn {
+    color: var(--pid-amber);
+}
+
+.programmeid-dd-status.is-err {
+    color: var(--pid-red);
+    font-weight: 500;
+}
